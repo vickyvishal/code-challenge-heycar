@@ -1,0 +1,13 @@
+.main-header {
+    display: flex;
+
+    .MuiPaper-root {
+        background-color: white;
+        display: flex;
+        flex-direction: row-reverse;
+
+        .MuiToolbar-root {
+            margin-right: 20px;
+        }
+    }
+}
