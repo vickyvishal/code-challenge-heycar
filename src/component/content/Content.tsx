@@ -9,9 +9,9 @@ import { GatewayModel, PostBody, ProjectModel, ReportDataModel } from "../../mod
 
 export const Content = () => {
     const [projectList, setProjectList] = useState<ProjectModel[]>([])
-    const [selectedProject, setSelectedProject] = useState<ProjectModel[]>([] as ProjectModel[])
+    const [selectedProject, setSelectedProject] = useState<ProjectModel[]>([] as ProjectModel[])//length === 1? then an item is selected [0]
     const [gatewayList, setGatewayList] = useState<GatewayModel[]>([])
-    const [selectedGateway, setSelectedGateway] = useState<GatewayModel[]>([] as GatewayModel[])
+    const [selectedGateway, setSelectedGateway] = useState<GatewayModel[]>([] as GatewayModel[])//length === 1? then an item is selected [0]
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [toDate, setToDate] = useState<Date | null>(new Date(2021, 11, 31))//https://stackoverflow.com/questions/2552483/why-does-the-month-argument-range-from-0-to-11-in-javascripts-date-constructor
     const [fromDate, setFromDate] = useState<Date |null>(new Date(2021, 0, 1))
@@ -19,10 +19,11 @@ export const Content = () => {
 
     const postFormData = () =>{
         let postBody = {} as PostBody
-        postBody.from =  `${fromDate?.getFullYear()}-${fromDate?.getMonth()! + 1}-${fromDate?.getDate()! + 1}`
-        postBody.to =  `${toDate?.getFullYear()}-${toDate?.getMonth()! + 1}-${toDate?.getDate()! + 1}`
-        postBody.gatewayId = selectedGateway[0].gatewayId
-        postBody.projectId = selectedProject[0].projectId
+        postBody.from =  `${fromDate?.getFullYear()}-${fromDate?.getMonth()! + 1}-${fromDate?.getDate()!}`
+        postBody.to =  `${toDate?.getFullYear()}-${toDate?.getMonth()! + 1}-${toDate?.getDate()!}`
+        postBody.gatewayId = selectedGateway.length === 1 ? selectedGateway[0].gatewayId : ""
+        postBody.projectId = selectedProject.length === 1 ? selectedProject[0].projectId : ""
+        console.log(postBody)
         axios.post(POST_REPORT_URL, postBody).then(postReportResponse => {
             setReportData(postReportResponse.data.data)
         }).catch(err => console.error(err))
