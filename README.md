@@ -15,3 +15,4 @@ npm install
 npm start
 ```
 
+Calender date has to be selected after selecting the year
