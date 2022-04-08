@@ -11,3 +11,5 @@ export const Initial_POST_REPORT_BODY = {
     "projectId": "",
     "gatewayId": ""
 }
+
+export const COLOR_SCALE_FOR_PIE_CHART = ["tomato", "orange", "gold", "cyan", "navy"]
