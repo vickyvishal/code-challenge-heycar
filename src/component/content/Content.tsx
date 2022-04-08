@@ -5,6 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { GET_GATEWAYS_URL, GET_PROJECTS_URL, Initial_POST_REPORT_BODY, POST_REPORT_URL } from "../../helpers/constants/constant";
 import { GatewayModel, PostBody, ProjectModel, ReportDataModel } from "../../models/mockUpModels";
+import { sortDate } from "../../helpers/functions/functions";
 
 
 export const Content = () => {
@@ -13,13 +14,13 @@ export const Content = () => {
     const [gatewayList, setGatewayList] = useState<GatewayModel[]>([])
     const [selectedGateway, setSelectedGateway] = useState<GatewayModel[]>([] as GatewayModel[])//length === 1? then an item is selected [0]
     const [toDate, setToDate] = useState<Date | null>(new Date(2021, 11, 31))//https://stackoverflow.com/questions/2552483/why-does-the-month-argument-range-from-0-to-11-in-javascripts-date-constructor
-    const [fromDate, setFromDate] = useState<Date |null>(new Date(2021, 0, 1))
+    const [fromDate, setFromDate] = useState<Date | null>(new Date(2021, 0, 1))
     const [reportData, setReportData] = useState<ReportDataModel[]>([])
 
-    const postFormData = () =>{
+    const postFormData = () => {
         let postBody = {} as PostBody
-        postBody.from =  `${fromDate?.getFullYear()}-${fromDate?.getMonth()! + 1}-${fromDate?.getDate()!}`
-        postBody.to =  `${toDate?.getFullYear()}-${toDate?.getMonth()! + 1}-${toDate?.getDate()!}`
+        postBody.from = `${fromDate?.getFullYear()}-${fromDate?.getMonth()! + 1}-${fromDate?.getDate()!}`
+        postBody.to = `${toDate?.getFullYear()}-${toDate?.getMonth()! + 1}-${toDate?.getDate()!}`
         postBody.gatewayId = selectedGateway.length === 1 ? selectedGateway[0].gatewayId : ""
         postBody.projectId = selectedProject.length === 1 ? selectedProject[0].projectId : ""
         axios.post(POST_REPORT_URL, postBody).then(postReportResponse => {
@@ -27,12 +28,18 @@ export const Content = () => {
         }).catch(err => console.error(err))
     }
 
-    const clearFilter = () =>{
+    const clearFilter = () => {
         setSelectedProject(projectList)
         setSelectedGateway(gatewayList)
         setToDate(new Date(2021, 11, 31))
         setFromDate(new Date(2021, 0, 1))
     }
+
+    const handleSort = () => {
+        setReportData(sortDate(reportData))
+    }
+
+
 
     useEffect(() => {
         axios.all([
@@ -67,16 +74,19 @@ export const Content = () => {
                 clearFilter={clearFilter}
             />
             {
-                reportData.length !==0 ?
-                <ContentBody
-                 projectList={projectList} 
-                 selectedProject={selectedProject}
-                 gatewayList={gatewayList} 
-                 selectedGateway={selectedGateway} 
-                 reportData={reportData}/>
-                 : <div className="no-report-body">No Reports</div>
+                reportData.length !== 0 ?
+                    <ContentBody
+                        projectList={projectList}
+                        selectedProject={selectedProject}
+                        gatewayList={gatewayList}
+                        selectedGateway={selectedGateway}
+                        reportData={reportData} 
+                        handleSort={handleSort}
+                        />
+                        
+            : <div className="no-report-body">No Reports</div>
             }
-            
+
         </div>
     )
 }

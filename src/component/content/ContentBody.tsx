@@ -10,6 +10,8 @@ export interface ContentBodyType {
     gatewayList: GatewayModel[]
     selectedGateway: GatewayModel[]
     reportData: ReportDataModel[]
+    handleSort:() => void
+
 }
 
 

@@ -3,7 +3,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { GatewayModel, ProjectModel } from "../../models/mockUpModels";
+import { GatewayModel, ProjectModel, ReportDataModel } from "../../models/mockUpModels";
 import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';

@@ -11,11 +11,11 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import { getSelectedProjectTotalAmount, filteredReportForProject, getSelectedGatewayTotalAmount, filteredReportForGateway } from "../../helpers/functions/functions"
-
+import { getSelectedProjectTotalAmount, filteredReportForProject, getSelectedGatewayTotalAmount, filteredReportForGateway, sortDate } from "../../helpers/functions/functions"
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 export const ContentAccordion = (props: ContentBodyType) => {
-    const { selectedProject, reportData, selectedGateway } = props
+    const { selectedProject, reportData, selectedGateway, handleSort } = props
     return (
         <div>
             {selectedProject.length === 1 && selectedGateway.length !== 1 ?
@@ -36,7 +36,7 @@ export const ContentAccordion = (props: ContentBodyType) => {
                                 <Table size="small" aria-label="a dense table">
                                 <TableHead>
                                         <TableRow>
-                                            <TableCell>Date</TableCell>
+                                            <TableCell>Date < ArrowUpwardIcon onClick={() => handleSort()}/></TableCell>
                                             <TableCell>Payment Id</TableCell>
                                             <TableCell>Amount</TableCell>
                                         </TableRow>
@@ -79,7 +79,7 @@ export const ContentAccordion = (props: ContentBodyType) => {
                                 <Table size="small" aria-label="a dense table">
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell>Date</TableCell>
+                                            <TableCell>Date < ArrowUpwardIcon onClick={() =>  handleSort()}/></TableCell>
                                             <TableCell>Gateway</TableCell>
                                             <TableCell>Payment Id</TableCell>
                                             <TableCell>Amount</TableCell>

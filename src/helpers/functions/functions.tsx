@@ -77,3 +77,7 @@ export const getSelectedGatewayTotalAmount = (gateway: GatewayModel, selectedPro
 export const getProjectTotalAmount = (reportData: ReportDataModel[]) => {
     return reportData.reduce((acc, item) => acc + item.amount, 0)
 }
+
+export const sortDate = (reportData: ReportDataModel[]): ReportDataModel[] =>{
+    return [...reportData.sort((a: any,b:any) => new Date(a.created).getTime() - new Date(b.created).getTime())]
+}

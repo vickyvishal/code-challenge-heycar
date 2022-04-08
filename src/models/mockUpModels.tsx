@@ -22,6 +22,7 @@ export interface GatewayModel{
 }
 
 export interface ReportDataModel {
+    date: string | number | Date;
     paymentId: string;
     amount: number;
     projectId: string;
