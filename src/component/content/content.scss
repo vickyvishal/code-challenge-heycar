@@ -1,7 +1,8 @@
 .content {
     display: flex;
     flex-direction: column;
-    .no-report-body{
+
+    .no-report-body {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -23,7 +24,8 @@
                 width: 150px;
                 margin: 8px;
             }
-            .generate-button{
+
+            .generate-button {
                 height: 40px;
                 width: 150px;
                 margin: 14px 8px;
@@ -34,10 +36,11 @@
     .content-body {
         display: flex;
         height: 288px;
-       
+
         .content-body-accordion {
             flex-grow: 1;
             margin-right: 40px;
+
             .content-body-background {
                 padding: 20px;
                 background-color: #ebfafa;
@@ -45,13 +48,27 @@
 
             }
 
+            .content-body-footer {
+                padding: 20px;
+                background-color: #ebfafa;
+                border-radius: 10px;
+                margin-top: 20px;
+
+                .MuiTypography-root {
+                    font-weight: bolder;
+
+                }
+            }
+
             .my-accordion {
                 margin-bottom: 40px;
                 border-radius: 10px;
-                .MuiAccordionSummary-content{
+
+                .MuiAccordionSummary-content {
                     display: flex;
                     justify-content: space-between;
-                    .MuiTypography-root{
+
+                    .MuiTypography-root {
                         font-weight: bolder;
                     }
                 }
@@ -79,6 +96,18 @@
                 }
 
             }
+            .content-body-footer {
+                padding: 20px;
+                background-color: #ebfafa;
+                border-radius: 10px;
+                margin-top: 20px;
+
+                .MuiTypography-root {
+                    font-weight: bolder;
+
+                }
+            }
+            
         }
     }
 }

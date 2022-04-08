@@ -12,7 +12,6 @@ export const Content = () => {
     const [selectedProject, setSelectedProject] = useState<ProjectModel[]>([] as ProjectModel[])//length === 1? then an item is selected [0]
     const [gatewayList, setGatewayList] = useState<GatewayModel[]>([])
     const [selectedGateway, setSelectedGateway] = useState<GatewayModel[]>([] as GatewayModel[])//length === 1? then an item is selected [0]
-    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [toDate, setToDate] = useState<Date | null>(new Date(2021, 11, 31))//https://stackoverflow.com/questions/2552483/why-does-the-month-argument-range-from-0-to-11-in-javascripts-date-constructor
     const [fromDate, setFromDate] = useState<Date |null>(new Date(2021, 0, 1))
     const [reportData, setReportData] = useState<ReportDataModel[]>([])
@@ -23,7 +22,6 @@ export const Content = () => {
         postBody.to =  `${toDate?.getFullYear()}-${toDate?.getMonth()! + 1}-${toDate?.getDate()!}`
         postBody.gatewayId = selectedGateway.length === 1 ? selectedGateway[0].gatewayId : ""
         postBody.projectId = selectedProject.length === 1 ? selectedProject[0].projectId : ""
-        console.log(postBody)
         axios.post(POST_REPORT_URL, postBody).then(postReportResponse => {
             setReportData(postReportResponse.data.data)
         }).catch(err => console.error(err))
@@ -37,7 +35,6 @@ export const Content = () => {
     }
 
     useEffect(() => {
-        setIsLoading(true)
         axios.all([
             axios.get(GET_PROJECTS_URL),
             axios.get(GET_GATEWAYS_URL),
@@ -50,10 +47,6 @@ export const Content = () => {
             setReportData(postReportResponse.data.data)
         })).catch(err => console.error(err))
     }, [])
-
-    useEffect(() => {
-        setIsLoading(false)
-    }, [projectList, gatewayList])
 
 
     return (
